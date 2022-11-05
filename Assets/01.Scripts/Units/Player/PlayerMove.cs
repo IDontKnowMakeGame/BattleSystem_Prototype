@@ -9,7 +9,7 @@ public class PlayerMove : PlayerBehaviour
     private Sequence seq;
     public PlayerBase ThisBase { get; set; }
     Vector3 nextDir = Vector3.zero;
-    private bool isMoving = false;
+    private bool isMove = false;
 
     public void Awake()
     {
@@ -21,7 +21,7 @@ public class PlayerMove : PlayerBehaviour
         
     }
 
-    public void Update()
+    public virtual void Update()
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
@@ -51,12 +51,13 @@ public class PlayerMove : PlayerBehaviour
         
     }
 
-    public void Translate()
+    protected virtual void Translate()
     {
-        if (isMoving || ThisBase.IsAttack)
+        Vector3Int dir = ThisBase.Pos.GamePos + new Vector3Int((int)nextDir.x, 0, (int)nextDir.z);
+        if (isMove || ThisBase.IsAttack || !MapManager.NullCheckMap(dir.x, dir.z))
             return;
         ThisBase.IsMoving = true;
-        isMoving = true;
+        isMove = true;
         nextDir *= 1.5f;
         switch (nextDir.x)
         {
@@ -71,7 +72,7 @@ public class PlayerMove : PlayerBehaviour
         seq.Append(ThisBase.transform.DOLocalMove(ThisBase.Pos.WorldPos + nextDir, 0.3f).SetEase(Ease.Linear));
         seq.AppendCallback(() =>
         {
-            isMoving = false;
+            isMove = false;
             ThisBase.IsMoving = false;
             nextDir = Vector3.zero;
             ThisBase.Pos.WorldPos = ThisBase.transform.position;

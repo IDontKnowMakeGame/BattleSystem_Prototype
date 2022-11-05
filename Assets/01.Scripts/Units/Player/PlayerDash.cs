@@ -4,10 +4,9 @@ using System.Reflection;
 using UnityEngine;
 using DG.Tweening;
 
-public class PlayerDash : PlayerBehaviour
+public class PlayerDash : PlayerMove
 {
     private Sequence seq;
-    public PlayerBase ThisBase { get; set; }
     private Vector3 nextDir = Vector3.zero;
     private bool isDash = false;
 
@@ -21,7 +20,7 @@ public class PlayerDash : PlayerBehaviour
         
     }
 
-    public void Update()
+    public override void Update()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -43,7 +42,6 @@ public class PlayerDash : PlayerBehaviour
             nextDir = Vector3.right;
             Translate();
         }
-        
     }
 
     public void LateUpdate()
@@ -51,9 +49,10 @@ public class PlayerDash : PlayerBehaviour
         
     }
 
-    public void Translate()
+    protected override void Translate()
     {
-        if (isDash || ThisBase.IsAttack)
+        Vector3Int dir = ThisBase.Pos.GamePos + new Vector3Int((int)nextDir.x, 0, (int)nextDir.z);
+        if (isDash || ThisBase.IsAttack || !MapManager.NullCheckMap(dir.x, dir.z))
             return;
         ThisBase.IsDash = true;
         isDash = true;

@@ -6,5 +6,5 @@ using UnityEngine;
 public class Floor : MapObject
 {
     public int idx = 0;
-    public Cube[,] cubes = new Cube[1000, 1000];
+    public Cube[,] cubes = new Cube[5, 5];
 }

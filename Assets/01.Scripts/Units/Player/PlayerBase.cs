@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 public class PlayerBase : MonoBehaviour
 {
     [SerializeField] private PlayerStat _stat = new PlayerStat();
-    [FormerlySerializedAs("_behaviours")] [SerializeField]
+    [SerializeField]
     private List<BehaviourEnum> behaviours = new List<BehaviourEnum>();
     private readonly List<PlayerBehaviour> playerBehaviours = new List<PlayerBehaviour>();
     [SerializeField] private Position pos = new Position();
