@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.WSA;
 using Object = UnityEngine.Object;
 
-public class MapManager : Manager
+public class MapManager : IManager
 {
     private readonly Floor[,] map = new Floor[1000,1000];
     private float distance = 1.5f;

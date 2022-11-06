@@ -667,14 +667,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1409302941}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c62ed7e65f24ef54cad48bc777c17935, type: 3}
+  m_Script: {fileID: 11500000, guid: c88429b94f15de640affbc74fc33a23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Managers: 00000000
   floorObject: {fileID: 3977571650869697607, guid: 62a6dc69e5390c2459d1bb3ac4e71a02, type: 3}
   diceObjects:
   - {fileID: 5520512386855403141, guid: d7a5b4cc044531c47962511d490dcbbd, type: 3}
   - {fileID: 0}
+  Managers: 00000000
 --- !u!4 &1409302943
 Transform:
   m_ObjectHideFlags: 0
@@ -1052,7 +1052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a645b24743e7c94d9e8e4bd01baae88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviours: 000000000300000002000000
+  behaviours: 010000000300000002000000
   pos:
     worldPos: {x: 0, y: 0, z: 0}
     gamePos: {x: 0, y: 0, z: 0}
@@ -1112,7 +1112,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1992964782}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20bd77194d2368d4f9d144f8a966b788, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f141fa2da5ae2e4880820eb87bb3239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   behaviours: 
