@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Cube : MapObject
 {
-    public int idx;
+    public int Idx;
     public bool CanMoveOn = true;
+    public bool IsPlayerOn = false;
 }

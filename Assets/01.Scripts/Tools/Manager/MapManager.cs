@@ -22,7 +22,6 @@ public class MapManager : Manager
 
     public void Awake()
     {
-        Debug.Log(Instance);
         var newData = new[,] {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
@@ -77,7 +76,7 @@ public class MapManager : Manager
             var temp = mainMap[i, j] = new Cube();
             temp.thisObject = ParentManager.diceObjects[mapData[y, x]];
             Debug.Log($"{x}, {y}");
-            temp.idx = i * 5 + j;
+            temp.Idx = i * 5 + j;
             temp.pos = new Position
             {
                 WorldPos = new Vector3(x, 0, y) * distance
@@ -106,7 +105,7 @@ public class MapManager : Manager
             cubeObject.transform.localEulerAngles = Vector3.zero;
             cubeObject.transform.position = cube.pos.WorldPos;
             cubeObject.transform.localScale *= diceSize;
-            cubeObject.name = $"Cube:#{cube.idx}";
+            cubeObject.name = $"Cube:#{cube.Idx}";
             cube.thisObject = cubeObject;
         }
 
@@ -128,12 +127,31 @@ public class MapManager : Manager
         {
             return false;
         }
-        int floorX = x / 5;
-        int floorY = y / 5;
+        var floorX = x / 5;
+        var floorY = y / 5;
         var floor = Instance.map[floorY, floorX];
         var cube = floor.cubes[(y % 5), (x % 5)];
-        var canMove = cube.CanMoveOn;
+        var canMove = cube.CanMoveOn && !cube.IsPlayerOn;
 
         return canMove;
     }
+
+    public void MoveUnitOn(Vector3Int cur, Vector3Int next) => MoveUnitOn(cur.x, cur.z, next.x, next.z);
+    public void MoveUnitOn(Vector3Int cur) => MoveUnitOn(cur.x, cur.z, cur.x, cur.z);
+
+    public void MoveUnitOn(int ox, int oy, int nx, int ny)
+    {
+        var floorX = ox / 5;
+        var floorY = oy / 5;
+        var floor = Instance.map[floorY, floorX];
+        var cube = floor.cubes[(oy % 5), (ox % 5)];
+        cube.IsPlayerOn = false;
+        
+        floorX = nx / 5;
+        floorY = ny / 5;
+        floor = Instance.map[floorY, floorX];
+        cube = floor.cubes[(ny % 5), (nx % 5)];
+        cube.IsPlayerOn = true;
+    }
+    
 }

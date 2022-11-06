@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -6,6 +7,10 @@ using UnityEngine;
 [System.Serializable]
 public class Position
 {
+    public Position()
+    {
+        worldPos = new Vector3();
+    }
     [SerializeField] private Vector3 worldPos;
     public Vector3 WorldPos
     {

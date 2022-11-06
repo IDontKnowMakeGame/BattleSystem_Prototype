@@ -1,30 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerAnimation : PlayerBehaviour
+public class PlayerAnimation : Animation
 {
-    public PlayerBase ThisBase { get; set; }
-    private Animator _animator = null;
-
-    private readonly int _moveHash = Animator.StringToHash("Move");
-    private readonly int _dashHash = Animator.StringToHash("Dash");
-    private readonly int _attackHash = Animator.StringToHash("Attack");
-
-    private bool isRunningAttackAnime = false;
-    public void Awake()
+    public override void Awake()
     {
-        _animator = ThisBase.GetComponentInChildren<Animator>();
+        base.Awake();
     }
 
-    public void Start()
+    public override void Start()
     {
-
-        
+        base.Start();
     }
 
-    public void Update()
+    public override void Update()
     {
         _animator.SetBool(_moveHash, ThisBase.IsMoving);
         if (ThisBase.IsAttack)
@@ -39,8 +29,8 @@ public class PlayerAnimation : PlayerBehaviour
         }
     }
 
-    public void LateUpdate()
+    public override void LateUpdate()
     {
-
+        base.LateUpdate();
     }
 }

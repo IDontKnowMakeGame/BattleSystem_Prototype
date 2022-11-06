@@ -2,22 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRender : PlayerBehaviour
+public class PlayerRender : Render
 {
-    
-    public PlayerBase ThisBase { get; set; }
-
-    public void Awake()
+    public override void Awake()
     {
-        
+        base.Awake();
     }
 
-    public void Start()
+    public override void Start()
     {
-        
+        base.Start();
     }
 
-    public void Update()
+    public override void Update()
     {
         if (ThisBase.IsRotate)
         {
@@ -29,8 +26,8 @@ public class PlayerRender : PlayerBehaviour
         }
     }
 
-    public void LateUpdate()
+    public override void LateUpdate()
     {
-        
+        base.LateUpdate();
     }
 }

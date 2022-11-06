@@ -6,14 +6,9 @@ using UnityEngine;
 [Serializable]
 public abstract class BaseStat
 {
-    [SerializeField]
-    protected int _hp = 0;
-    [SerializeField]
-    protected int _damage = 0;
-    [SerializeField]
-    protected float _speed = 0;
-    [SerializeField]
-    protected float _beforeDelay = 0;
-    [SerializeField]
-    protected float _afterDelay = 0;
+    public int hp = 0;
+    public int damage = 0;
+    public float speed = 0;
+    public float beforeDelay = 0;
+    public float afterDelay = 0;
 }

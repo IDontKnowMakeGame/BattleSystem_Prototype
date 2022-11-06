@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
@@ -6,16 +6,13 @@ using DG.Tweening;
 
 public class PlayerDash : PlayerMove
 {
-    private Sequence seq;
-    private Vector3 nextDir = Vector3.zero;
-    private bool isDash = false;
 
-    public void Awake()
+    public override void Awake()
     {
         
     }
 
-    public void Start()
+    public override void Start()
     {
         
     }
@@ -44,7 +41,7 @@ public class PlayerDash : PlayerMove
         }
     }
 
-    public void LateUpdate()
+    public override void LateUpdate()
     {
         
     }
@@ -52,11 +49,8 @@ public class PlayerDash : PlayerMove
     protected override void Translate()
     {
         Vector3Int dir = ThisBase.Pos.GamePos + new Vector3Int((int)nextDir.x, 0, (int)nextDir.z);
-        if (isDash || ThisBase.IsAttack || !MapManager.NullCheckMap(dir.x, dir.z))
+        if (isMove || ThisBase.IsAttack || !MapManager.NullCheckMap(dir.x, dir.z))
             return;
-        ThisBase.IsDash = true;
-        isDash = true;
-        nextDir *= 1.5f;
         switch (nextDir.x)
         {
             case > 0:
@@ -66,14 +60,28 @@ public class PlayerDash : PlayerMove
                 ThisBase.IsRotate = true;
                 break;
         }
+        switch (nextDir.z)
+        {
+            case > 0:
+                ThisBase.IsForward = true;
+                break;
+            case < 0:
+                ThisBase.IsForward = false;
+                break;
+        }
+        ThisBase.IsDash = true;
+        isMove = true;
+        nextDir *= 1.5f;
         seq = DOTween.Sequence();
         seq.Append(ThisBase.transform.DOLocalMove(ThisBase.Pos.WorldPos + nextDir, 0.3f).SetEase(Ease.Linear));
         seq.AppendCallback(() =>
         {
-            isDash = false;
+            isMove = false;
             ThisBase.IsDash = false;
-            nextDir = Vector3.zero;
+            nextDir = Vector3.zero;       
+            Vector3Int originalPos = ThisBase.Pos.GamePos;
             ThisBase.Pos.WorldPos = ThisBase.transform.position;
+            MapManager.Instance.MoveUnitOn(originalPos ,ThisBase.Pos.GamePos);
             seq.Kill();
         });
     }

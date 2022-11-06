@@ -6,7 +6,22 @@ using UnityEngine;
 [Serializable]
 public class PlayerStat : BaseStat
 {
-    public float RageGauge;
-    public float Adrenaline;
-    [SerializeField] private WeaponSO _weapon;
+    public float rageGauge;
+    public float adrenaline;
+
+    private bool IsBerserk => rageGauge >= 100;
+    [SerializeField] private WeaponSO weapon;
+
+    public int Damage
+    {
+        get
+        {
+            var baseStatDamage = damage;
+            var baseWeaponDamage = weapon._weaponStat.damage;
+            if (IsBerserk)
+                baseWeaponDamage *= 2;
+            var temp = baseStatDamage *= baseWeaponDamage;
+            return temp;
+        }
+    }
 }
