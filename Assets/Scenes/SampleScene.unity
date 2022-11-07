@@ -249,7 +249,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506349013}
-  m_LocalRotation: {x: 0.38268346, y: 0.000000022481217, z: -0.000000009312026, w: 0.92387956}
+  m_LocalRotation: {x: 0.38268346, y: -0.00000002248122, z: 0.000000009312027, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -520,7 +520,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.38268346, y: 0.000000022481217, z: -0.000000009312026, w: 0.92387956}
+  m_LocalRotation: {x: 0.38268346, y: -0.00000002248122, z: 0.000000009312027, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1052,7 +1052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a645b24743e7c94d9e8e4bd01baae88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviours: 010000000300000002000000
+  behaviours: 01000000030000000200000004000000
   pos:
     worldPos: {x: 0, y: 0, z: 0}
     gamePos: {x: 0, y: 0, z: 0}
@@ -1063,7 +1063,7 @@ MonoBehaviour:
   <IsAttack>k__BackingField: 0
   stat:
     hp: 0
-    damage: 0
+    damage: 1
     speed: 0
     beforeDelay: 0
     afterDelay: 0
@@ -1079,7 +1079,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1992964783}
-  - component: {fileID: 1992964784}
+  - component: {fileID: 1992964786}
   - component: {fileID: 1992964785}
   m_Layer: 0
   m_Name: Enemy(Dummy)
@@ -1104,27 +1104,6 @@ Transform:
   m_Father: {fileID: 300035491}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1992964784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1992964782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f141fa2da5ae2e4880820eb87bb3239, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  behaviours: 
-  pos:
-    worldPos: {x: 0, y: 0, z: 0}
-    gamePos: {x: 0, y: 0, z: 0}
-  <IsRotate>k__BackingField: 0
-  <IsForward>k__BackingField: 0
-  <IsMoving>k__BackingField: 0
-  <IsDash>k__BackingField: 0
-  <IsAttack>k__BackingField: 0
 --- !u!114 &1992964785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1163,3 +1142,30 @@ MonoBehaviour:
     isLooping: 0
   isCurrentStateOver: 1
   canDoAgain: 1
+--- !u!114 &1992964786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992964782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfb7e17db8c0a214aa93e983f93f8fc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  behaviours: 
+  pos:
+    worldPos: {x: 0, y: 0, z: 0}
+    gamePos: {x: 0, y: 0, z: 0}
+  <IsRotate>k__BackingField: 0
+  <IsForward>k__BackingField: 0
+  <IsMoving>k__BackingField: 0
+  <IsDash>k__BackingField: 0
+  <IsAttack>k__BackingField: 0
+  stat:
+    hp: 10
+    damage: 0
+    speed: 0
+    beforeDelay: 0
+    afterDelay: 0
