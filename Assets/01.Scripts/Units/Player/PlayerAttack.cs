@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerAttack : Attack
@@ -41,10 +42,28 @@ public class PlayerAttack : Attack
 
     protected override void DoAttack(Vector3Int direction)
     {
+       if(isAttacking)
+           return;
+       ThisBase.StartCoroutine(AttackCoroutine(direction));
+    }
+    
+    private IEnumerator AttackCoroutine(Vector3Int direction)
+    {
+        isAttacking = true;
+        
+        float beforeDelay = ((PlayerBase)ThisBase).stat.beforeDelay;
+        float afterDelay = ((PlayerBase)ThisBase).stat.afterDelay;
+        
+        yield return new WaitForSeconds(beforeDelay);
+        ThisBase.IsAttack = true;
         var atkPos = ThisBase.Pos.GamePos + direction;
         var atkCube = MapManager.GetCube(atkPos);
         TargetBase = atkCube?.TheUnitOn;
         ((EnemyBase)TargetBase)?.stat.Damage(((PlayerBase)ThisBase).stat.damage);
         Debug.Log("Player Attack" + atkPos);
+        yield return new WaitForSeconds(afterDelay);
+        
+        isAttacking = false;    
+        ThisBase.IsAttack = false;
     }
 }
