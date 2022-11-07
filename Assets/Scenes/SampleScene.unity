@@ -249,7 +249,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506349013}
-  m_LocalRotation: {x: 0.38268346, y: -0.00000002248122, z: 0.000000009312027, w: 0.92387956}
+  m_LocalRotation: {x: 0.38268346, y: 0.000000022481217, z: -0.000000009312026, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -520,7 +520,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.38268346, y: -0.00000002248122, z: 0.000000009312027, w: 0.92387956}
+  m_LocalRotation: {x: 0.38268346, y: 0.000000022481217, z: -0.000000009312026, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1080,6 +1080,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1992964783}
   - component: {fileID: 1992964784}
+  - component: {fileID: 1992964785}
   m_Layer: 0
   m_Name: Enemy(Dummy)
   m_TagString: Enemy
@@ -1124,3 +1125,36 @@ MonoBehaviour:
   <IsMoving>k__BackingField: 0
   <IsDash>k__BackingField: 0
   <IsAttack>k__BackingField: 0
+--- !u!114 &1992964785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992964782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d8045f098c58448a4c7eb711878e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentState: 0
+  states:
+  - thisState: 0
+    transitions:
+    - _positiveConditions:
+      - thisCondition: 0
+        param: 2
+      _negativeConditions: []
+      IsAllTrue: 1
+      IsPositiveAllTrue: 0
+      IsNegativeAllTrue: 1
+      NextState: 1
+  - thisState: 1
+    transitions:
+    - _positiveConditions: []
+      _negativeConditions: []
+      IsAllTrue: 1
+      IsPositiveAllTrue: 1
+      IsNegativeAllTrue: 1
+      NextState: 0
+  isCurrentStateOver: 1

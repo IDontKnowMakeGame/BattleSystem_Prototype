@@ -75,7 +75,6 @@ public class MapManager : IManager
             var y = (arr / mapDivide) * 5 + (cnt / rowLength);
             var temp = mainMap[i, j] = new Cube();
             temp.thisObject = ParentManager.diceObjects[mapData[y, x]];
-            Debug.Log($"{x}, {y}");
             temp.Idx = i * 5 + j;
             temp.pos = new Position
             {
