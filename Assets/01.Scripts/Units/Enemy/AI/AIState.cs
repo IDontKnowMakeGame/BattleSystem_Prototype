@@ -17,7 +17,7 @@ public class AIState
 {
     public StateEnum thisState;
     public List<AITransition> transitions = new List<AITransition>();
-
+    public bool isLooping;
     public virtual void DoAction(AIBase thisBase, Action callback)
     {
         

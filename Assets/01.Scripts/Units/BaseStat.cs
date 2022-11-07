@@ -11,4 +11,13 @@ public abstract class BaseStat
     public float speed = 0;
     public float beforeDelay = 0;
     public float afterDelay = 0;
+    
+    public void Damage(int damage)
+    {
+        hp -= damage;
+        if (hp <= 0)
+        {
+            hp = 0;
+        }
+    }
 }

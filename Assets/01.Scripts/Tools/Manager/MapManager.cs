@@ -135,22 +135,35 @@ public class MapManager : IManager
         return canMove;
     }
 
+    public void MoveUnitOn(UnitBase unitBase)
+    {
+        Vector3Int curPos = unitBase.Pos.GamePos;
+        var cube = GetCube(curPos.x, curPos.z);
+        cube.TheUnitOn = unitBase;
+        Debug.Log($"{unitBase.name} is on {curPos}");
+        MoveUnitOn(unitBase.Pos.GamePos);
+    }
     public void MoveUnitOn(Vector3Int cur, Vector3Int next) => MoveUnitOn(cur.x, cur.z, next.x, next.z);
     public void MoveUnitOn(Vector3Int cur) => MoveUnitOn(cur.x, cur.z, cur.x, cur.z);
 
     public void MoveUnitOn(int ox, int oy, int nx, int ny)
     {
-        var floorX = ox / 5;
-        var floorY = oy / 5;
-        var floor = Instance.map[floorY, floorX];
-        var cube = floor.cubes[(oy % 5), (ox % 5)];
+        var cube = GetCube(ox, oy);
         cube.IsPlayerOn = false;
-        
-        floorX = nx / 5;
-        floorY = ny / 5;
-        floor = Instance.map[floorY, floorX];
-        cube = floor.cubes[(ny % 5), (nx % 5)];
+
+        cube = GetCube(nx, ny);
         cube.IsPlayerOn = true;
     }
     
+    public static Cube GetCube(Vector3Int pos) => GetCube(pos.x, pos.z);
+    public static Cube GetCube(int x, int y)
+    {
+        var floorX = x / 5;
+        var floorY = y / 5;
+        if(x < 0 || x >= Instance.mapCount * 5 / 2 || y < 0 || y >= Instance.mapCount * 5 /2)
+            return null;
+        var floor = Instance.map[floorY, floorX];
+        var cube = floor?.cubes[(y % 5), (x % 5)]; 
+        return cube;
+    }
 }

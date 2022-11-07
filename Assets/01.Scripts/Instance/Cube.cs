@@ -7,4 +7,5 @@ public class Cube : MapObject
     public int Idx;
     public bool CanMoveOn = true;
     public bool IsPlayerOn = false;
+    public UnitBase TheUnitOn = null;
 }

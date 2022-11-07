@@ -38,15 +38,19 @@ public class UnitBase : MonoBehaviour
     {
         Init();
         pos.WorldPos = transform.localPosition;
-        MapManager.Instance.MoveUnitOn(pos.GamePos);
+        foreach (var behaviour in _behaviours)
+        {
+            behaviour.Awake();
+        }
     }
     
     
     protected virtual void Start()
     {
+        MapManager.Instance.MoveUnitOn(this);
         foreach (var behaviour in _behaviours)
         {
-            behaviour.Awake();
+            behaviour.Start();
         }
     }
     

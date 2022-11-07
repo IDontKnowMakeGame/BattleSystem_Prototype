@@ -20,6 +20,7 @@ public class TimeCondition : AICondition
             if(_time >= _goalTime)
             {
                 _isChecking = false;
+                
                 return true;
             }
         }

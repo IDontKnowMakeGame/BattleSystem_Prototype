@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerBase : UnitBase
 {
-    [SerializeField] private PlayerStat stat = new PlayerStat();
+    public PlayerStat stat = new PlayerStat();
 
     protected override void Init()
     {

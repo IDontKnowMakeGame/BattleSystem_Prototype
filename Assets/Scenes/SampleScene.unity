@@ -1145,16 +1145,21 @@ MonoBehaviour:
       - thisCondition: 0
         param: 2
       _negativeConditions: []
-      IsAllTrue: 1
+      IsAllTrue: 0
       IsPositiveAllTrue: 0
-      IsNegativeAllTrue: 1
+      IsNegativeAllTrue: 0
       NextState: 1
+    isLooping: 0
   - thisState: 1
     transitions:
-    - _positiveConditions: []
+    - _positiveConditions:
+      - thisCondition: 0
+        param: 2
       _negativeConditions: []
-      IsAllTrue: 1
-      IsPositiveAllTrue: 1
-      IsNegativeAllTrue: 1
+      IsAllTrue: 0
+      IsPositiveAllTrue: 0
+      IsNegativeAllTrue: 0
       NextState: 0
+    isLooping: 0
   isCurrentStateOver: 1
+  canDoAgain: 1
