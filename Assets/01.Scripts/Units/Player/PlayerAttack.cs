@@ -42,7 +42,7 @@ public class PlayerAttack : Attack
 
     protected override void DoAttack(Vector3Int direction)
     {
-       if(isAttacking)
+       if(isAttacking || ThisBase.IsMoving || ThisBase.IsDash)
            return;
        ThisBase.StartCoroutine(AttackCoroutine(direction));
     }
@@ -50,12 +50,12 @@ public class PlayerAttack : Attack
     private IEnumerator AttackCoroutine(Vector3Int direction)
     {
         isAttacking = true;
+        ThisBase.IsAttack = true;
         
         float beforeDelay = ((PlayerBase)ThisBase).stat.beforeDelay;
         float afterDelay = ((PlayerBase)ThisBase).stat.afterDelay;
         
         yield return new WaitForSeconds(beforeDelay);
-        ThisBase.IsAttack = true;
         var atkPos = ThisBase.Pos.GamePos + direction;
         var atkCube = MapManager.GetCube(atkPos);
         TargetBase = atkCube?.TheUnitOn;
