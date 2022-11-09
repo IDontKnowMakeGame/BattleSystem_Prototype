@@ -141,18 +141,26 @@ public class MapManager : IManager
         var cube = GetCube(curPos.x, curPos.z);
         cube.TheUnitOn = unitBase;
         Debug.Log($"{unitBase.name} is on {curPos}");
-        MoveUnitOn(unitBase.Pos.GamePos);
+        MoveUnitOn(unitBase.Pos.GamePos, unitBase);
     }
     public void MoveUnitOn(Vector3Int cur, Vector3Int next) => MoveUnitOn(cur.x, cur.z, next.x, next.z);
+    public void MoveUnitOn(Vector3Int cur, Vector3Int next, UnitBase unitBase) => MoveUnitOn(cur.x, cur.z, next.x, next.z, unitBase);
+    public void MoveUnitOn(Vector3Int cur, UnitBase unitBase) => MoveUnitOn(cur.x, cur.z, cur.x, cur.z, unitBase);
     public void MoveUnitOn(Vector3Int cur) => MoveUnitOn(cur.x, cur.z, cur.x, cur.z);
-
-    public void MoveUnitOn(int ox, int oy, int nx, int ny)
+    public void MoveUnitOn(int ox, int oy, int nx, int ny, UnitBase unit = null)
     {
         var cube = GetCube(ox, oy);
         cube.IsPlayerOn = false;
+        cube.SetUnit(null);
 
         cube = GetCube(nx, ny);
         cube.IsPlayerOn = true;
+        cube.SetUnit(unit);
+    }
+
+    public void MoveUnitOn(int ox, int oy, int nx, int ny)
+    {
+       MoveUnitOn(ox, oy, nx, ny, null);
     }
     
     public static Cube GetCube(Vector3Int pos) => GetCube(pos.x, pos.z);

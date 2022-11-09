@@ -9,7 +9,7 @@ public class PlayerDash : PlayerMove
 
     public override void Awake()
     {
-        
+        base.Awake();
     }
 
     public override void Start()
@@ -73,7 +73,7 @@ public class PlayerDash : PlayerMove
         isMove = true;
         nextDir *= 1.5f;
         seq = DOTween.Sequence();
-        seq.Append(ThisBase.transform.DOLocalMove(ThisBase.Pos.WorldPos + nextDir, 0.3f).SetEase(Ease.Linear));
+        seq.Append(ThisBase.transform.DOLocalMove(ThisBase.Pos.WorldPos + nextDir, moveSpeed).SetEase(Ease.Linear));
         seq.AppendCallback(() =>
         {
             isMove = false;
@@ -81,7 +81,8 @@ public class PlayerDash : PlayerMove
             nextDir = Vector3.zero;       
             Vector3Int originalPos = ThisBase.Pos.GamePos;
             ThisBase.Pos.WorldPos = ThisBase.transform.position;
-            MapManager.Instance.MoveUnitOn(originalPos ,ThisBase.Pos.GamePos);
+            MapManager.Instance.MoveUnitOn(originalPos ,ThisBase.Pos.GamePos, ThisBase);
+            Init();
             seq.Kill();
         });
     }

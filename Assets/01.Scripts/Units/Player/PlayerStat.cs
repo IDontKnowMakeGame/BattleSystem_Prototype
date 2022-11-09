@@ -10,7 +10,7 @@ public class PlayerStat : BaseStat
     public float adrenaline;
 
     private bool IsBerserk => rageGauge >= 100;
-    [SerializeField] private WeaponSO weapon;
+    public WeaponSO weapon;
 
     public int Damage
     {

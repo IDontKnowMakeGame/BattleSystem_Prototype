@@ -7,6 +7,12 @@ public class Attack : IBehaviour
     public UnitBase ThisBase { get; set; }
     public UnitBase TargetBase { get; set; }
     protected bool isAttacking = false;
+    
+    public virtual void Init()
+    {
+        
+    }
+    
     public virtual void Awake()
     {
 

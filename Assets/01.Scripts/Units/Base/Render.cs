@@ -5,6 +5,12 @@ using UnityEngine;
 public class Render : IBehaviour
 {
     public virtual UnitBase ThisBase { get; set; }
+    
+    public virtual void Init()
+    {
+        
+    }
+    
     public virtual void Awake()
     {
         

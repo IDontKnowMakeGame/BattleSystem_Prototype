@@ -16,6 +16,7 @@ public enum BehaviourEnum
 public interface IBehaviour
 {
     UnitBase ThisBase { get; set; }
+    public void Init();
     public void Awake();
     public void Start();
     public void Update();

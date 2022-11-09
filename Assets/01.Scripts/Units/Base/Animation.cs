@@ -9,6 +9,11 @@ public class Animation : IBehaviour
     protected readonly int _dashHash = Animator.StringToHash("Dash");
     protected readonly int _attackHash = Animator.StringToHash("Attack");
     public UnitBase ThisBase { get; set; }
+    public virtual void Init()
+    {
+        
+    }
+
     public virtual void Awake()
     {
         _animator = ThisBase.GetComponentInChildren<Animator>();
