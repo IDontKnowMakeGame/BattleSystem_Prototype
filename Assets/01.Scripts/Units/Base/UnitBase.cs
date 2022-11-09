@@ -17,6 +17,7 @@ public class UnitBase : MonoBehaviour
     public bool IsDash { get; set; }
     [field:SerializeField]
     public bool IsAttack { get; set; }
+    public bool isAttack { get; set; }
     public Position Pos
     {
         get => pos;

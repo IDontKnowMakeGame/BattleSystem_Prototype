@@ -17,10 +17,10 @@ public class PlayerAnimation : Animation
     public override void Update()
     {
         _animator.SetBool(_moveHash, ThisBase.IsMoving);
-        if (ThisBase.IsAttack)
+        if (ThisBase.isAttack)
         {
             _animator.SetTrigger(_attackHash);
-            ThisBase.IsAttack = false;
+            ThisBase.isAttack = false;
         }
         if (ThisBase.IsDash)
         {

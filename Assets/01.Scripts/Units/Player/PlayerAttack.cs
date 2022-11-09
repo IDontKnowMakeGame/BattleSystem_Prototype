@@ -56,6 +56,7 @@ public class PlayerAttack : Attack
         float afterDelay = ((PlayerBase)ThisBase).stat.afterDelay;
         
         yield return new WaitForSeconds(beforeDelay);
+        ThisBase.isAttack = true;
         var atkPos = ThisBase.Pos.GamePos + direction;
         var atkCube = MapManager.GetCube(atkPos);
         TargetBase = atkCube?.TheUnitOn;
@@ -64,6 +65,7 @@ public class PlayerAttack : Attack
         yield return new WaitForSeconds(afterDelay);
         
         isAttacking = false;    
+        ThisBase.isAttack = false; 
         ThisBase.IsAttack = false;
     }
 }
