@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerBase : UnitBase
@@ -23,10 +24,14 @@ public class PlayerBase : UnitBase
     protected override void Awake()
     {
         base.Awake();
+        stat.ThisPlayer = this;
     }
 
     protected override void Update()
     {
         base.Update();
+        if(Input.GetKeyDown(KeyCode.Space))
+            stat.TakeDamage(10);
+        stat.Update();
     }
 }

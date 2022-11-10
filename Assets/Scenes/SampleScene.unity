@@ -1065,7 +1065,7 @@ MonoBehaviour:
     hp: 0
     damage: 1
     speed: 0
-    beforeDelay: 0
+    beforeDelay: 0.9
     afterDelay: 0
     rageGauge: 0
     adrenaline: 0

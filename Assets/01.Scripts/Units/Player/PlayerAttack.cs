@@ -60,8 +60,7 @@ public class PlayerAttack : Attack
         var atkPos = ThisBase.Pos.GamePos + direction;
         var atkCube = MapManager.GetCube(atkPos);
         TargetBase = atkCube?.TheUnitOn;
-        ((EnemyBase)TargetBase)?.stat.Damage(((PlayerBase)ThisBase).stat.damage);
-        Debug.Log("Player Attack" + atkPos);
+        ((EnemyBase)TargetBase)?.stat.TakeDamage(((PlayerBase)ThisBase).stat.damage);
         yield return new WaitForSeconds(afterDelay);
         
         isAttacking = false;    

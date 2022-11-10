@@ -12,7 +12,7 @@ public abstract class BaseStat
     public float beforeDelay = 0;
     public float afterDelay = 0;
     
-    public void Damage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         hp -= damage;
         if (hp <= 0)
