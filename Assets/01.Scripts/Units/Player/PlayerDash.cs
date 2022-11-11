@@ -6,10 +6,12 @@ using DG.Tweening;
 
 public class PlayerDash : PlayerMove
 {
+    private PlayerBase ThisPlayer;
 
     public override void Awake()
     {
         base.Awake();
+        ThisPlayer = ThisBase as PlayerBase;
     }
 
     public override void Start()
@@ -73,7 +75,7 @@ public class PlayerDash : PlayerMove
         isMove = true;
         nextDir *= 1.5f;
         seq = DOTween.Sequence();
-        seq.Append(ThisBase.transform.DOLocalMove(ThisBase.Pos.WorldPos + nextDir, moveSpeed).SetEase(Ease.Linear));
+        seq.Append(ThisBase.transform.DOLocalMove(ThisBase.Pos.WorldPos + nextDir, ThisPlayer.stat.GetStat().speed).SetEase(Ease.Linear));
         seq.AppendCallback(() =>
         {
             isMove = false;

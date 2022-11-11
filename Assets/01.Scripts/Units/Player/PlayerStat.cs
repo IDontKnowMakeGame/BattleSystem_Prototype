@@ -7,16 +7,38 @@ using UnityEngine;
 [Serializable]
 public class PlayerStat : BaseStat
 {
+    public float reduceDamage => IsBerserk ? 0.5f : 1f;
     public float rageGauge;
     public float adrenaline;
 
     public bool IsBerserk = false;
+    public bool IsMadden = false;
     public WeaponSO weapon;
     public PlayerBase ThisPlayer { get; set; }
 
     public float _berserkTimer = 0;
-    private bool _isBerserkTimerRunning = false;
-    
+    private bool _isBerserkTimerRunning = false;    
+
+
+    public BaseStat GetStat()
+    {
+        var stat = new BaseStat();
+        stat.hp = this.hp + weapon._weaponStat.hp;
+        stat.damage = this.damage;
+        if (IsBerserk)
+            stat.damage += weapon._weaponStat.damage * 2;
+        else
+            stat.damage += weapon._weaponStat.damage;
+        stat.speed = (int)this.weapon._weaponStat.Weight * 0.1f;
+        stat.beforeDelay = this.beforeDelay + weapon._weaponStat.beforeDelay;
+        if (IsMadden)
+        {
+            stat.speed -= 0.1f;
+            stat.beforeDelay -= 0.3f;
+        }
+        stat.afterDelay = this.afterDelay + weapon._weaponStat.afterDelay;
+        return stat;
+    }
     
     public void Update()
     {
@@ -43,10 +65,11 @@ public class PlayerStat : BaseStat
         }
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, float reduce = 1f)
     {
-        base.TakeDamage(damage);
+        base.TakeDamage(damage, reduceDamage);
         rageGauge += 20;
+        ReduceAdrenaline(50);
         if(rageGauge >= 100)
         {
             rageGauge = 100;
@@ -86,5 +109,40 @@ public class PlayerStat : BaseStat
         rageGauge = 0;
         IsBerserk = false;
         _isBerserkTimerRunning = false;
+    }
+    
+    public void AddAdrenaline(float amount)
+    {
+        adrenaline += amount;
+        if (adrenaline >= 100)
+        {
+            adrenaline = 100;
+            if (IsMadden is false)
+            {
+                IsMadden = true;
+                ThisPlayer.StartCoroutine(ReduceAdrenalineCoroutine());
+            }
+            
+        }
+    }
+    
+    public void ReduceAdrenaline(float amount)
+    {
+        adrenaline -= amount;
+        if (adrenaline <= 0)
+        {
+            adrenaline = 0;
+            IsMadden = false;   
+        }
+    }
+    
+    public IEnumerator ReduceAdrenalineCoroutine()
+    {
+        while (IsMadden)
+        {
+            yield return new WaitForSeconds(0.25f);
+            if(IsMadden is not true) yield break;
+            ReduceAdrenaline(7.5f);
+        }
     }
 }

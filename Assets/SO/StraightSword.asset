@@ -16,6 +16,6 @@ MonoBehaviour:
     hp: 0
     damage: 0
     speed: 0
-    beforeDelay: 0
-    afterDelay: 0
-    Weight: 5
+    beforeDelay: 0.5
+    afterDelay: 0.5
+    Weight: 2

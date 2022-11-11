@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class PlayerAttack : Attack
 {
+    private PlayerBase ThisPlayer = null;
     public override void Awake()
     {
         base.Awake();
+        ThisPlayer = ThisBase as PlayerBase;
     }
 
     public override void Start()
@@ -52,15 +54,20 @@ public class PlayerAttack : Attack
         isAttacking = true;
         ThisBase.IsAttack = true;
         
-        float beforeDelay = ((PlayerBase)ThisBase).stat.beforeDelay;
-        float afterDelay = ((PlayerBase)ThisBase).stat.afterDelay;
+        float beforeDelay = ThisPlayer.stat.GetStat().beforeDelay;
+        float afterDelay = ThisPlayer.stat.GetStat().afterDelay;
         
         yield return new WaitForSeconds(beforeDelay);
         ThisBase.isAttack = true;
         var atkPos = ThisBase.Pos.GamePos + direction;
         var atkCube = MapManager.GetCube(atkPos);
         TargetBase = atkCube?.TheUnitOn;
-        ((EnemyBase)TargetBase)?.stat.TakeDamage(((PlayerBase)ThisBase).stat.damage);
+        ((EnemyBase)TargetBase)?.stat.TakeDamage(ThisPlayer.stat.GetStat().damage, 1);    
+        if(TargetBase is null)
+            ThisPlayer.stat.ReduceAdrenaline(5);
+        else
+            ThisPlayer.stat.AddAdrenaline(10);
+            
         yield return new WaitForSeconds(afterDelay);
         
         isAttacking = false;    

@@ -31,7 +31,7 @@ public class PlayerBase : UnitBase
     {
         base.Update();
         if(Input.GetKeyDown(KeyCode.Space))
-            stat.TakeDamage(10);
+            stat.TakeDamage(10, 0);
         stat.Update();
     }
 }
