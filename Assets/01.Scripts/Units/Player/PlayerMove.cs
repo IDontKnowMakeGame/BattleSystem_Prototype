@@ -8,6 +8,8 @@ public class PlayerMove : Move
 {
     private PlayerBase ThisPlayer;
 
+    private Queue<Vector3> moveDir = new Queue<Vector3>();
+
     public override void Awake()
     {
         base.Awake();
@@ -16,32 +18,35 @@ public class PlayerMove : Move
 
     public override void Start()
     {
-        
+
     }
 
     public override void Update()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        InputMovement();
+        PopMove();
+    }
+
+    public void InputMovement()
+    {
+        if (moveDir.Count > 2) return;
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+            moveDir.Enqueue(Vector3.forward);
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+            moveDir.Enqueue(Vector3.back);
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+            moveDir.Enqueue(Vector3.left);
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+            moveDir.Enqueue(Vector3.right);
+    }
+
+    public void PopMove()
+    {
+        if(moveDir.Count > 0 && !isMove)
         {
-            nextDir = Vector3.forward;
+            nextDir = moveDir.Dequeue();
             Translate();
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            nextDir = Vector3.left;
-            Translate();
-        }
-        else if (Input.GetKey(KeyCode.DownArrow))
-        {
-            nextDir = Vector3.back;
-            Translate();
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            nextDir = Vector3.right;
-            Translate();
-        }
-        
     }
 
     public override void LateUpdate()
