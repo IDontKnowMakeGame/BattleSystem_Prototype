@@ -10,6 +10,28 @@ public class Cube : MapObject
     public bool IsPlayerOn = false;
     public UnitBase TheUnitOn = null;
 
+    // Astar
+    private int g;
+    private int h;
+    public Cube parent;
+
+    public int gCost
+    {
+        get { return g; }
+        set { g = value; }
+    }
+
+    public int hCost
+    {
+        get { return h; }
+        set { h = value; }
+    }
+
+    public int fCost
+    {
+        get { return g + h; }
+    }
+
     public UnitBase GetUnit()
     {
         return TheUnitOn;

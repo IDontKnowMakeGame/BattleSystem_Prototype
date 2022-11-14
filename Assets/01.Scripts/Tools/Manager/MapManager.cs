@@ -20,6 +20,21 @@ public class MapManager : IManager
 
     public GameManager ParentManager { get; set; }
 
+
+    // To Do 불려오는 방식 바꿔보기
+    private Astar pathFinding;
+    public Astar PathFinding
+    {
+        get
+        {
+            if(pathFinding == null)
+            {
+                GameObject.Find("Astar").GetComponent<Astar>();
+            }
+            return pathFinding;
+        }
+    }
+
     public void Awake()
     {
         var newData = new[,] {
@@ -48,7 +63,10 @@ public class MapManager : IManager
 
     public void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            //Debug.Log(GetCube(5, 3));
+        }
     }
 
     public void LateUpdate()
@@ -133,6 +151,35 @@ public class MapManager : IManager
         var canMove = cube.CanMoveOn && !cube.IsPlayerOn;
 
         return canMove;
+    }
+
+    public List<Cube> GetNeighbours(Cube node)
+    {
+        List<Cube> neighbours = new List<Cube>();
+        // 상하좌우 세팅
+        int[,] temp = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+        bool[] walkableUDLR = new bool[4];
+
+        // 상하좌우의 노드 계산
+        for(int i = 0; i < 4; i++)
+        {
+            int checkX = node.pos.GamePos.x + temp[i, 0];
+            int checkY = node.pos.GamePos.z + temp[i, 1];
+
+            // To do 맵 크기 5로 가정
+            if (checkX >= 0 && checkX < 5 && checkY >= 0 && checkY < 5)
+            {
+                if(GetCube(checkX, checkX).CanMoveOn)
+                {
+                    walkableUDLR[i] = true;
+                    neighbours.Add(GetCube(checkX, checkY));
+                }
+            }
+        }
+
+        // To Do 필요하면 대각선의 노드도 계산하기
+
+        return neighbours;
     }
 
     public void MoveUnitOn(UnitBase unitBase)
