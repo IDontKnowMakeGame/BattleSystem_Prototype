@@ -10,6 +10,8 @@ public class PlayerMove : Move
 
     private Queue<Vector3> moveDir = new Queue<Vector3>();
 
+    public bool isSkill = false;
+
     public override void Awake()
     {
         base.Awake();
@@ -23,21 +25,26 @@ public class PlayerMove : Move
 
     public override void Update()
     {
-        InputMovement();
+        if(Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            if (!isSkill) moveDir.Clear();
+            isSkill = !isSkill;
+        }
+        InputMovement(isSkill ? 2 : 1);
         PopMove();
     }
 
-    public void InputMovement()
+    public void InputMovement(int speed = 1)
     {
         if (moveDir.Count > 2) return;
         if (Input.GetKeyDown(KeyCode.UpArrow))
-            moveDir.Enqueue(Vector3.forward);
+            moveDir.Enqueue(Vector3.forward * speed);
         if (Input.GetKeyDown(KeyCode.DownArrow))
-            moveDir.Enqueue(Vector3.back);
+            moveDir.Enqueue(Vector3.back * speed);
         if (Input.GetKeyDown(KeyCode.LeftArrow))
-            moveDir.Enqueue(Vector3.left);
+            moveDir.Enqueue(Vector3.left * speed);
         if (Input.GetKeyDown(KeyCode.RightArrow))
-            moveDir.Enqueue(Vector3.right);
+            moveDir.Enqueue(Vector3.right * speed);
     }
 
     public void PopMove()
