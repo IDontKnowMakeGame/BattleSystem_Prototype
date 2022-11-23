@@ -44,7 +44,7 @@ public class PlayerAttack : Attack
 
     protected override void DoAttack(Vector3Int direction)
     {
-       if(isAttacking || ThisBase.IsMoving || ThisBase.IsDash)
+       if(isAttacking || ThisBase.IsMoving || ThisBase.IsDash || ((PlayerBase)ThisBase).isSkill)
            return;
        ThisBase.StartCoroutine(AttackCoroutine(direction));
     }

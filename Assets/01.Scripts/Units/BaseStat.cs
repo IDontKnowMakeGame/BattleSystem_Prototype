@@ -11,10 +11,13 @@ public class BaseStat
     public float speed = 0;
     public float beforeDelay = 0;
     public float afterDelay = 0;
-    
-    public virtual void TakeDamage(int damage, float reduce)
+	public bool canAttackable = true;
+
+	public virtual void TakeDamage(int damage, float reduce)
     {
-        hp -= Mathf.RoundToInt(damage * reduce);
+		if (!canAttackable)
+			return;
+		hp -= Mathf.RoundToInt(damage * reduce);
         if (hp <= 0)
         {
             hp = 0;

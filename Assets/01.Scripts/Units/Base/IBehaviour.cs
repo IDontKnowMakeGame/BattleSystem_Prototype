@@ -10,7 +10,8 @@ public enum BehaviourEnum
     Dash,
     Render,
     Animation,
-    Attack
+    Attack,
+    Skill
 }
 
 public interface IBehaviour

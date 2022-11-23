@@ -1409,7 +1409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a645b24743e7c94d9e8e4bd01baae88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  behaviours: 00000000030000000200000004000000
+  behaviours: 0000000003000000020000000400000005000000
   pos:
     worldPos: {x: 0, y: 0, z: 0}
     gamePos: {x: 0, y: 0, z: 0}
@@ -1418,17 +1418,19 @@ MonoBehaviour:
   <IsMoving>k__BackingField: 0
   <IsDash>k__BackingField: 0
   <IsAttack>k__BackingField: 0
+  <IsStun>k__BackingField: 0
   stat:
     hp: 0
     damage: 1
-    speed: 0
+    speed: 1
     beforeDelay: 0
     afterDelay: 0
+    canAttackable: 1
     rageGauge: 0
     adrenaline: 0
     IsBerserk: 0
     IsMadden: 0
-    weapon: {fileID: 11400000, guid: ea180a2ad28bf094ab62b9aea20d19e5, type: 2}
+    weapon: {fileID: 11400000, guid: eef3370e6e6ad9846aff8cc1c05fce62, type: 2}
     _berserkTimer: 0
 --- !u!1 &1992964782
 GameObject:
@@ -1523,9 +1525,11 @@ MonoBehaviour:
   <IsMoving>k__BackingField: 0
   <IsDash>k__BackingField: 0
   <IsAttack>k__BackingField: 0
+  <IsStun>k__BackingField: 0
   stat:
     hp: 10
     damage: 0
     speed: 0
     beforeDelay: 0
     afterDelay: 0
+    canAttackable: 1

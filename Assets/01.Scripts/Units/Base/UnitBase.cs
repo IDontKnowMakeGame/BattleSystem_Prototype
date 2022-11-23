@@ -18,7 +18,9 @@ public class UnitBase : MonoBehaviour
     [field:SerializeField]
     public bool IsAttack { get; set; }
     public bool isAttack { get; set; }
-    public Position Pos
+	[field: SerializeField]
+	public bool IsStun { get; set; }
+	public Position Pos
     {
         get => pos;
         set => pos = value;
@@ -30,6 +32,7 @@ public class UnitBase : MonoBehaviour
             var type = System.Type.GetType(behaviour.ToString());
             object obj = System.Activator.CreateInstance(type);
             var behave = obj as IBehaviour;
+            Debug.Log(behave);
             behave.ThisBase = this;
             _behaviours.Add(behave);
         }
@@ -41,7 +44,9 @@ public class UnitBase : MonoBehaviour
         pos.WorldPos = transform.localPosition;
         foreach (var behaviour in _behaviours)
         {
-            behaviour.Awake();
+			if (IsStun)
+				return;
+			behaviour.Awake();
         }
     }
     
@@ -51,7 +56,9 @@ public class UnitBase : MonoBehaviour
         MapManager.Instance.MoveUnitOn(this);
         foreach (var behaviour in _behaviours)
         {
-            behaviour.Start();
+			if (IsStun)
+				return;
+			behaviour.Start();
         }
     }
     
@@ -59,7 +66,9 @@ public class UnitBase : MonoBehaviour
     {
         foreach (var behaviour in _behaviours)
         {
-            behaviour.Update();
+			if (IsStun)
+				return;
+			behaviour.Update();
         }
     }
     
@@ -67,7 +76,9 @@ public class UnitBase : MonoBehaviour
     {
         foreach (var behaviour in _behaviours)
         {
-            behaviour.LateUpdate();
+			if (IsStun)
+				return;
+			behaviour.LateUpdate();
         }
     }
 }

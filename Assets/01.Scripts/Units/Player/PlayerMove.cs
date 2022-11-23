@@ -56,7 +56,13 @@ public class PlayerMove : Move
         }
     }
 
-    public override void LateUpdate()
+	public void MovePlayer(Vector3 vec)
+	{
+		nextDir = vec;
+		Translate();
+	}
+
+	public override void LateUpdate()
     {
         
     }
