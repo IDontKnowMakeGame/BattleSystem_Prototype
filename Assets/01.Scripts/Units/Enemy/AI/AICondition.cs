@@ -7,6 +7,9 @@ using UnityEngine.Experimental.GlobalIllumination;
 public enum ConditionEnum
 {
     Time,
+    HorizontalLine,
+    VerticalLine,
+    Range,
 }
 
 [System.Serializable]
