@@ -10,6 +10,8 @@ public enum StateEnum
 {
     Idle, 
     Move,
+    Attack,
+    Step,
 }
 
 [System.Serializable]

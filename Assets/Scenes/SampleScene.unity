@@ -954,6 +954,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6414394267063369032, guid: 23547f58dd7c5564f92ed0f2c9395e53, type: 3}
   m_PrefabInstance: {fileID: 875223293}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &875223295 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6414394267063369038, guid: 23547f58dd7c5564f92ed0f2c9395e53, type: 3}
+  m_PrefabInstance: {fileID: 875223293}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba56266a33841ab42849ecb6ead9e745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1823,6 +1834,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6414394267063369032, guid: 23547f58dd7c5564f92ed0f2c9395e53, type: 3}
   m_PrefabInstance: {fileID: 1827582820}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1855283837 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6414394267063369038, guid: 23547f58dd7c5564f92ed0f2c9395e53, type: 3}
+  m_PrefabInstance: {fileID: 1827582820}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba56266a33841ab42849ecb6ead9e745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1903844709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1911,7 +1933,7 @@ MonoBehaviour:
   <IsAttack>k__BackingField: 0
   <IsStun>k__BackingField: 0
   stat:
-    hp: 0
+    hp: 100
     damage: 1
     speed: 1
     beforeDelay: 0
@@ -1923,8 +1945,8 @@ MonoBehaviour:
     IsBerserk: 0
     IsMadden: 0
     weapon: {fileID: 11400000, guid: eef3370e6e6ad9846aff8cc1c05fce62, type: 2}
-    adSlider: {fileID: 0}
-    rageSlider: {fileID: 0}
+    adSlider: {fileID: 1855283837}
+    rageSlider: {fileID: 875223295}
     _berserkTimer: 0
 --- !u!1 &1992964782
 GameObject:
@@ -1972,9 +1994,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62d8045f098c58448a4c7eb711878e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyBase: {fileID: 0}
   CurrentState: 0
   states:
   - thisState: 0
+    transitions:
+    - _positiveConditions:
+      - thisCondition: 1
+        param: 0
+      - thisCondition: 2
+        param: 20
+      _negativeConditions:
+      - thisCondition: 3
+        param: 1
+      IsAllTrue: 1
+      IsPositiveAllTrue: 0
+      IsNegativeAllTrue: 0
+      NextState: 2
+    - _positiveConditions:
+      - thisCondition: 3
+        param: 1
+      _negativeConditions: []
+      IsAllTrue: 0
+      IsPositiveAllTrue: 0
+      IsNegativeAllTrue: 0
+      NextState: 3
+    isLooping: 0
+  - thisState: 2
     transitions:
     - _positiveConditions:
       - thisCondition: 0
@@ -1983,9 +2029,9 @@ MonoBehaviour:
       IsAllTrue: 0
       IsPositiveAllTrue: 0
       IsNegativeAllTrue: 0
-      NextState: 1
+      NextState: 0
     isLooping: 0
-  - thisState: 1
+  - thisState: 3
     transitions:
     - _positiveConditions:
       - thisCondition: 0
@@ -1997,7 +2043,7 @@ MonoBehaviour:
       NextState: 0
     isLooping: 0
   isCurrentStateOver: 1
-  canDoAgain: 1
+  canDoAgain: 0
 --- !u!114 &1992964786
 MonoBehaviour:
   m_ObjectHideFlags: 0

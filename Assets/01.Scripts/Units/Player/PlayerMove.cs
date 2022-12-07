@@ -72,7 +72,6 @@ public class PlayerMove : Move
         var dir = ThisBase.Pos.GamePos + new Vector3Int((int)nextDir.x, 0, (int)nextDir.z);
         if (isMove || ThisBase.IsAttack)
             return;
-        Debug.Log(nextDir.magnitude);
         if(!MapManager.NullCheckMap(dir.x, dir.z))
         {
             if (nextDir.magnitude == 2)

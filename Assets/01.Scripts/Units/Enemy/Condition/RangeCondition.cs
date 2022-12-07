@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RangeCondition : AICondition
 {
-    private int _range;
+    private int _range = 0;
     private Vector3Int _playerPos;
     public bool CheckCondition(AIBase thisBase)
     {

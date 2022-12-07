@@ -19,5 +19,5 @@ MonoBehaviour:
     beforeDelay: 0
     afterDelay: 0
     canAttackable: 1
-    Weight: 10
+    Weight: 5
   skillStat: {fileID: 11400000, guid: e12f6c66634d8884dba1ddc1c02bcac0, type: 2}

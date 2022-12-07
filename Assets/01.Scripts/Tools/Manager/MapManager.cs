@@ -63,10 +63,7 @@ public class MapManager : IManager
 
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha8))
-        {
-            //Debug.Log(GetCube(5, 3));
-        }
+        
     }
 
     public void LateUpdate()
@@ -153,6 +150,8 @@ public class MapManager : IManager
         return canMove;
     }
 
+    public static bool NullCheckMap(Vector3Int pos) => NullCheckMap(pos.x, pos.z);
+
     public List<Cube> GetNeighbours(Cube node)
     {
         List<Cube> neighbours = new List<Cube>();
@@ -187,7 +186,6 @@ public class MapManager : IManager
         Vector3Int curPos = unitBase.Pos.GamePos;
         var cube = GetCube(curPos.x, curPos.z);
         cube.TheUnitOn = unitBase;
-        Debug.Log($"{unitBase.name} is on {curPos}");
         MoveUnitOn(unitBase.Pos.GamePos, unitBase);
     }
     public void MoveUnitOn(Vector3Int cur, Vector3Int next) => MoveUnitOn(cur.x, cur.z, next.x, next.z);
@@ -201,6 +199,7 @@ public class MapManager : IManager
         cube.SetUnit(null);
 
         cube = GetCube(nx, ny);
+        Debug.Log($"{unit.name} is on {nx} , {ny}");
         cube.IsPlayerOn = true;
         cube.SetUnit(unit);
     }
@@ -221,4 +220,12 @@ public class MapManager : IManager
         var cube = floor?.cubes[(y % 5), (x % 5)]; 
         return cube;
     }
+    
+    public static void Boom(int x, int z, int damage)
+    {
+        var cube = GetCube(x, z);
+        cube?.Attack(damage);
+    }
+    
+    public static void Boom(Vector3Int pos, int damage) => Boom(pos.x, pos.z, damage);
 }

@@ -5,16 +5,17 @@ using UnityEngine;
 
 public class HorizontalLineCondition : AICondition
 {
-    int _line;
     private Vector3Int _playerPos;
+    private Vector3Int _enemyPos;
     public bool CheckCondition(AIBase thisBase)
     {
         _playerPos = Define.PlayerBase.Pos.GamePos;
-        return _playerPos.z == _line;
+        _enemyPos = thisBase.EnemyBase.Pos.GamePos;
+        return _playerPos.z == _enemyPos.z;
     }
 
     public void SetParam(int param)
     {
-        _line = param;
+        
     }
 }

@@ -23,4 +23,16 @@ public class Position
     }
     [SerializeField] private Vector3Int gamePos;
     public Vector3Int GamePos => gamePos;
+
+    public void MovePos(UnitBase unit, Vector3 pos)
+    {
+        var newPos = new Position
+        {
+            WorldPos = pos
+        };
+
+        MapManager.Instance.MoveUnitOn(gamePos, newPos.GamePos, unit);
+
+        WorldPos = newPos.WorldPos;
+    }
 }
