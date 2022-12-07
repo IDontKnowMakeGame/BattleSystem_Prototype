@@ -70,8 +70,26 @@ public class PlayerMove : Move
     protected virtual void Translate()
     {
         var dir = ThisBase.Pos.GamePos + new Vector3Int((int)nextDir.x, 0, (int)nextDir.z);
-        if (isMove || ThisBase.IsAttack || !MapManager.NullCheckMap(dir.x, dir.z))
+        if (isMove || ThisBase.IsAttack)
             return;
+        Debug.Log(nextDir.magnitude);
+        if(!MapManager.NullCheckMap(dir.x, dir.z))
+        {
+            if (nextDir.magnitude == 2)
+            {
+                nextDir.Normalize();
+                dir = ThisBase.Pos.GamePos + new Vector3Int((int)nextDir.x , 0, (int)nextDir.z);
+                if (!MapManager.NullCheckMap(dir.x, dir.z)) return;
+            }
+            else
+                return;
+        }
+        else
+        {
+            dir = ThisBase.Pos.GamePos + new Vector3Int((int)nextDir.normalized.x, 0, (int)nextDir.normalized.z);
+            if (!MapManager.NullCheckMap(dir.x, dir.z)) return;
+        }
+
         switch (nextDir.x)
         {
             case > 0:
