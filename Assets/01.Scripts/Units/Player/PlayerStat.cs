@@ -16,7 +16,10 @@ public class PlayerStat : BaseStat
     public WeaponSO weapon;
     public PlayerBase ThisPlayer { get; set; }
 
-    public float _berserkTimer = 0;
+	public BasicHPSlider adSlider;
+	public BasicHPSlider rageSlider;
+
+	public float _berserkTimer = 0;
     private bool _isBerserkTimerRunning = false;    
 
 
@@ -102,7 +105,8 @@ public class PlayerStat : BaseStat
         {
             ResetRageGauge();
         }
-    }
+		rageSlider.SetSlider(rageGauge);
+	}
     
     public void ResetRageGauge()
     {
@@ -124,7 +128,8 @@ public class PlayerStat : BaseStat
             }
             
         }
-    }
+		adSlider.SetSlider(adrenaline, true);
+	}
     
     public void ReduceAdrenaline(float amount)
     {
@@ -134,7 +139,8 @@ public class PlayerStat : BaseStat
             adrenaline = 0;
             IsMadden = false;   
         }
-    }
+		adSlider.SetSlider(adrenaline);
+	}
     
     public IEnumerator ReduceAdrenalineCoroutine()
     {

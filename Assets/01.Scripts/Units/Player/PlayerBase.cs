@@ -9,7 +9,10 @@ public class PlayerBase : UnitBase
 	public bool isSkill { get; set; }
 	protected override void Init()
     {
-        foreach (var behaviour in behaviours)
+		stat.basicHPSlider.InitSlider(stat.hp);
+		stat.adSlider.InitSlider(100, stat.adrenaline);
+		stat.rageSlider.InitSlider(100, stat.rageGauge);
+		foreach (var behaviour in behaviours)
         {
             var type = System.Type.GetType("Player"+ behaviour.ToString());
             if (type == null) continue;

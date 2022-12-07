@@ -12,13 +12,15 @@ public class BaseStat
     public float beforeDelay = 0;
     public float afterDelay = 0;
 	public bool canAttackable = true;
+	public BasicHPSlider basicHPSlider;
 
 	public virtual void TakeDamage(int damage, float reduce)
     {
 		if (!canAttackable)
 			return;
 		hp -= Mathf.RoundToInt(damage * reduce);
-        if (hp <= 0)
+		basicHPSlider.SetSlider(hp);
+		if (hp <= 0)
         {
             hp = 0;
         }
