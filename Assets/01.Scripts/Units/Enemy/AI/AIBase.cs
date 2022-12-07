@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class AIBase : MonoBehaviour
 {
+    public EnemyBase EnemyBase;
     public StateEnum CurrentState;
     public List<AIState> states = new();
     private List<AITransition> thisTransitions = new();
@@ -14,6 +15,7 @@ public class AIBase : MonoBehaviour
 
     private void Awake()
     {
+        EnemyBase = GetComponent<EnemyBase>();
         foreach (var state in states)
         {
             var type = System.Type.GetType(state.thisState.ToString() + "State");
