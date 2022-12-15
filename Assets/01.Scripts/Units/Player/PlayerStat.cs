@@ -48,6 +48,7 @@ public class PlayerStat : BaseStat
         if (rageGauge <= 0) return;
         if (_isBerserkTimerRunning) return;
         _berserkTimer += Time.deltaTime;
+
         if (_berserkTimer >= 3)
         {
             _isBerserkTimerRunning = true;
@@ -72,12 +73,15 @@ public class PlayerStat : BaseStat
     {
         base.TakeDamage(damage, reduceDamage);
         rageGauge += 20;
-        ReduceAdrenaline(50);
+		rageSlider.SetSlider(rageGauge);
+		ReduceAdrenaline(50);
+
         if(rageGauge >= 100)
         {
             rageGauge = 100;
             IsBerserk = true;
         }
+
         _isBerserkTimerRunning = false;
         _berserkTimer = 0;
     }
@@ -101,11 +105,13 @@ public class PlayerStat : BaseStat
             rageGauge -= 20;
         else
             rageGauge -= 5;
-        if(rageGauge <= 0)
+
+		rageSlider.SetSlider(rageGauge);
+
+		if (rageGauge <= 0)
         {
             ResetRageGauge();
         }
-		rageSlider.SetSlider(rageGauge);
 	}
     
     public void ResetRageGauge()
@@ -118,6 +124,7 @@ public class PlayerStat : BaseStat
     public void AddAdrenaline(float amount)
     {
         adrenaline += amount;
+		adSlider.SetSlider(adrenaline, true);
         if (adrenaline >= 100)
         {
             adrenaline = 100;
@@ -128,7 +135,6 @@ public class PlayerStat : BaseStat
             }
             
         }
-		adSlider.SetSlider(adrenaline, true);
 	}
     
     public void ReduceAdrenaline(float amount)

@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum SwordType : int
+public enum SwordSkillType : int
 {
-	StraightSword,
+	None,
+	//StraightSword,
 	GreatSword,
 	END
 }
@@ -11,5 +12,5 @@ public enum SwordType : int
 public class WeaponSO : ScriptableObject
 {
 	public WeaponStat _weaponStat;
-	public SkillSO skillStat;
+	public SwordSkillType swordType;
 }

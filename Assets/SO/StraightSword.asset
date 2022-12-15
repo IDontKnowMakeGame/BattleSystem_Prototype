@@ -18,4 +18,7 @@ MonoBehaviour:
     speed: 0
     beforeDelay: 0.5
     afterDelay: 0.5
-    Weight: 2
+    canAttackable: 1
+    basicHPSlider: {fileID: 0}
+    Weight: 5
+  swordType: 1

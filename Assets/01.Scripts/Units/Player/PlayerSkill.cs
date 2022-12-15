@@ -9,7 +9,7 @@ public class PlayerSkill : IBehaviour
 	public UnitBase TargetBase { get; set; }
 
 	protected bool isSkill;
-	public SwordType thisSwordType
+	public SwordSkillType thisSwordType
 	{
 		get { return _thisSwordType; }
 		set
@@ -17,6 +17,8 @@ public class PlayerSkill : IBehaviour
 			_thisSwordType = value;
 			var type = System.Type.GetType("Player" + value.ToString() + "Skill");
 			Debug.Log(type);
+
+
 			var obj = System.Activator.CreateInstance(type);
 			var behave = obj as ISkill;
 			behave.ThisBase = ThisBase;
@@ -24,7 +26,7 @@ public class PlayerSkill : IBehaviour
 		}
 	}
 
-	private SwordType _thisSwordType;
+	private SwordSkillType _thisSwordType;
 	private ISkill behaviour;
 
 	public virtual void Init()
